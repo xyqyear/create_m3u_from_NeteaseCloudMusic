@@ -184,11 +184,11 @@ def save_m3u(m3u_content, encoding='utf-8'):
     """把m3u字典写入文件"""
     for name, content in m3u_content.items():
         # 去除敏感字符
-        name = name.replace('\\',' ')\
-            .replace('/',' ').replace(':',' ')\
-            .replace('*',' ').replace('?',' ')\
-            .replace('"',' ').replace('<',' ')\
-            .replace('>',' ').replace('|',' ')
+        name = name.replace('\\', ' ')\
+            .replace('/', ' ').replace(':', ' ')\
+            .replace('*', ' ').replace('?', ' ')\
+            .replace('"', ' ').replace('<', ' ')\
+            .replace('>', ' ').replace('|', ' ')
         with open(name + '.m3u', 'w', encoding=encoding) as m3u_file:
             m3u_file.write(content)
 
