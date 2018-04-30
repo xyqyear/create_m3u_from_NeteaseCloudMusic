@@ -4,7 +4,7 @@ _**代码已经完全重写，与旧版本完全没有任何关系了(ૢ˃ꌂ˂
 **_适用于Windows_**
 
 #### 此程序可以分析网易云客户端的数据库文件\
-#### 然后导出播放列表为m3u格式
+#### 然后在程序所在目录导出播放列表为m3u格式
 
 此程序需要网易云的配置文件处于默认目录\
 可能将来会做手动选择网易云数据库文件目录的功能\
@@ -47,12 +47,15 @@ _**代码已经完全重写，与旧版本完全没有任何关系了(ૢ˃ꌂ˂
 - [x] 按照用户id筛选
 - [x] 按照是否是自己创建的歌单筛选
 - [ ] 简单的GUI
+    - [ ] 自定义输出播放列表文件目录
+    - [ ] 图形化选择输出的歌单
+    - [ ] 
 
 ## 以下是各个函数的说明:
 
 ### logger
 仅仅是一个日志记录器而已\
-因为还没有做其他功能，以后估计会加上时间啥的
+因为还没有做其他功能，以后估计会加上输出时间和debug信息啥的
 
 输入: str
 效果：print出str的内容
@@ -77,9 +80,11 @@ _**代码已经完全重写，与旧版本完全没有任何关系了(ૢ˃ꌂ˂
 ### get_playlist
 获取播放列表，返回值为一个字典
 
-输入：webdb的文件路径，可以通过上面一个函数获取
+输入：
 
-输出：播放列表的字典，格式为：
+    webdb.dat的文件路径，可以通过上面一个函数获取
+
+返回值：播放列表的字典，格式为：
 
     {pid:{'playlist_name': ...,
             'userid': ...,
@@ -93,4 +98,86 @@ _**代码已经完全重写，与旧版本完全没有任何关系了(ૢ˃ꌂ˂
 
 因为其中可能混杂着其他目录，所以如果某个目录出现频率超过0.9就认定为是下载目录
 
-待续...
+输入：
+    
+    library.dat的路径，可以通过get_dir_of_db获取
+
+返回值：windows路径字符串
+
+### tid2dir_offline
+转化tid为本地路径
+
+输入:
+
+    1.library.dat的路径
+    2.webdb.dat的路径
+    3.可以通过get_dir_of_db获取
+
+返回值：
+
+    {tid1:dir1,tid2:dir2}
+    
+这样形式的字典,其中tid为int，dir为str
+
+### playlist_dict_to_m3u
+转化指定播放列表为m3u内容
+
+输入：
+    
+    1.playlist字典（通过get_playlist获取)
+    2.tid对应的路径字典(通过tid2dir获取)
+
+输出：{playlist_name:m3u_content}格式的字典\
+playlist_name为播放列表的名字，m3u_content为播放列表内容
+
+### playlist_fliter_as_subscribed
+按照是否为收藏的歌单过滤播放列表id（pid）
+
+输入：
+    
+    1.dict:playlist
+    2.boolean:
+        True：筛选用户收藏的歌单
+        False：筛选用户创建的歌单
+        
+返回值：
+
+以pid为元素的列表
+
+### playlist_filter_as_userid
+按照歌单所有者来过滤
+
+输入：
+
+    1.dict:playlist
+    2.int：用户ID
+    
+返回值：
+
+以pid为元素的列表
+
+### save_m3u
+保存m3u文件于当前目录，以后估计会加上自定义目录。
+
+输入:
+
+    1.str: encoding:文件编码
+    2.dict: playlist_dict_to_m3u输出的字典
+    
+效果：把m3u文件保存到程序所在目录
+
+### main:
+
+1.获取数据库文件目录，分别储存于library_dat和webdb_dat
+
+2.初始化播放列表和歌曲转换表，分别储存于playlists和songs
+
+3.用户选择第一个模式
+
+4.用户选择第二个模式
+
+5.得到playlist_ids 即filter输出的筛选表列表
+
+6.根据playlists，songs和filter获取m3u_content
+
+7.保存m3u文件。

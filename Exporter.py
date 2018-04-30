@@ -180,7 +180,7 @@ def playlist_filter_as_userid(playlists, userid):
     return playlist_ids
 
 
-def save_m3u(encoding, m3u_content):
+def save_m3u(m3u_content, encoding='utf-8'):
     """把m3u字典写入文件"""
     for name, content in m3u_content.items():
         # 去除敏感字符
@@ -200,11 +200,11 @@ if __name__ == '__main__':
         logger('无法找到网易云数据库文件')
         os._exit(0)
     library_dat = dirs['library.dat']
-    webdb_dir = dirs['webdb.dat']
+    webdb_dat = dirs['webdb.dat']
 
     # 初始化播放列表和歌曲转换表
-    playlists = get_playlist(webdb_dir)
-    songs = tid2dir_offline(library_dat, webdb_dir)
+    playlists = get_playlist(webdb_dat)
+    songs = tid2dir_offline(library_dat, webdb_dat)
 
     # 用户筛选
     filter_mode = input('请输入筛选模式，1代表按照用户id筛选，2代表按照是否是自己的歌单筛选:')
@@ -229,4 +229,4 @@ if __name__ == '__main__':
     # 生成m3u格式字符串
     m3u_dict = playlist_dict_to_m3u(playlists, songs, playlist_ids)
     # 保存到文件
-    save_m3u('utf-8', m3u_dict)
+    save_m3u(m3u_dict)
