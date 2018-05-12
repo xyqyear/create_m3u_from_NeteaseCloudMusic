@@ -99,8 +99,11 @@ def tid2dir_offline(library_dir, webdb_dir):
     web_cloud_track = webdb_cursor.execute(
         'SELECT id,file FROM web_cloud_track')
     for tid, file in web_cloud_track:
-        # 这里tid是str，转化为int，转化过程中应该不会出问题
-        tid = int(tid)
+        # 这里tid是str，转化为int，转化过程中出现问题就跳过
+        try:
+            tid = int(tid)
+        except ValueError:
+            continue
         if file is not '':
             songs_cloud[tid] = file
 
@@ -189,7 +192,7 @@ def save_m3u(m3u_content, encoding='utf-8'):
             .replace('*', ' ').replace('?', ' ')\
             .replace('"', ' ').replace('<', ' ')\
             .replace('>', ' ').replace('|', ' ')
-        with open(name + '.m3u', 'w', encoding=encoding) as m3u_file:
+        with open(name + '.m3u', 'w', encoding=encoding, errors='ignore') as m3u_file:
             m3u_file.write(content)
 
 
