@@ -99,3 +99,5 @@ ENV/
 
 # mypy
 .mypy_cache/
+dist/Exporter_gbk.exe
+Exporter_gbk.py

@@ -201,7 +201,7 @@ if __name__ == '__main__':
     dirs = get_dir_of_db()
     if not dirs['ok']:
         logger('无法找到网易云数据库文件')
-        os._exit(0)
+        quit()
     library_dat = dirs['library.dat']
     webdb_dat = dirs['webdb.dat']
 
