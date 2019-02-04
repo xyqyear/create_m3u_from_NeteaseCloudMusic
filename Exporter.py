@@ -5,6 +5,7 @@ import json
 import os
 
 
+# TODO
 def logger(info):
     """日志记录器"""
     info = str(info)
@@ -86,7 +87,6 @@ def get_songs_dir(library_dir):
     return songs_dir
 
 
-# 这个函数应该没问题了
 def tid2dir_offline(library_dir, webdb_dir):
     """转化tid为 文件路径
     返回{tid1:dir1,tid2:dir2}"""
@@ -126,24 +126,6 @@ def tid2dir_offline(library_dir, webdb_dir):
     return songs_dict
 
 
-# TODO
-def tid2dir_online():
-    """在没有本地文件的时候用这个函数"""
-    return None
-
-
-# TODO
-def tid2title(webdb):
-    """转化tid为 歌名"""
-    return None
-
-
-# TODO
-def tid2singer_title(webdb):
-    """转化tid为 歌手-歌名"""
-    return None
-
-
 def playlist_dict_to_m3u(playlists, songs, playlist_ids):
     """转换指定播放列表为m3u文件内容"""
     m3u_content = dict()
@@ -165,11 +147,11 @@ def playlist_dict_to_m3u(playlists, songs, playlist_ids):
     return m3u_content
 
 
-def playlist_fliter_as_subscribed(playlists, issubscribed):
+def playlist_fliter_as_subscribed(playlists, is_subscribed):
     """返回值是一个pid为元素的列表"""
     playlist_ids = list()
     for pid, playlist in playlists.items():
-        if playlist['subscribed'] is issubscribed:
+        if playlist['subscribed'] is is_subscribed:
             playlist_ids.append(pid)
     return playlist_ids
 
@@ -196,7 +178,7 @@ def save_m3u(m3u_content, encoding='utf-8'):
             m3u_file.write(content)
 
 
-if __name__ == '__main__':
+def main():
     # 获取数据库文件
     dirs = get_dir_of_db()
     if not dirs['ok']:
@@ -233,3 +215,7 @@ if __name__ == '__main__':
     m3u_dict = playlist_dict_to_m3u(playlists, songs, playlist_ids)
     # 保存到文件
     save_m3u(m3u_dict)
+
+
+if __name__ == '__main__':
+    main()
