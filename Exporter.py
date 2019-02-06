@@ -168,7 +168,6 @@ def main():
     library_dat = dirs['library.dat']
     webdb_dat = dirs['webdb.dat']
 
-    # 初始化播放列表和歌曲转换表
     playlists = get_playlist(webdb_dat)
     songs = tid2dir_offline(library_dat, webdb_dat)
 
