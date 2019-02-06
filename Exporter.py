@@ -76,14 +76,14 @@ def get_songs_dir(library_dir):
     lib_data = lib_sql.execute('SELECT dir FROM track')
     # 转化为列表，这样就能计数啦
     lib_data = [i for i in lib_data]
+    lib_data_len = len(lib_data)
     songs_dir = str()
-    # 如果某个目录出现次数超过99%,就判定这个目录就是歌曲的储存目录
+    # 如果某个目录出现次数超过90%,就判定这个目录就是歌曲的储存目录(临时)
     for dir_ in lib_data:
-        if lib_data.count(dir_) / len(lib_data) > 0.9:
-            # 没想到返回值是个tuple，这里取第一个元素应该没问题
+        if lib_data.count(dir_) / lib_data_len > 0.9:
+            # 返回值是个tuple
             songs_dir = dir_[0]
             break
-
     return songs_dir
 
 
@@ -92,36 +92,17 @@ def tid2dir_offline(library_dir, webdb_dir):
     返回{tid1:dir1,tid2:dir2}"""
     songs_dir = get_songs_dir(library_dir)
     webdb_sql = sqlite3.connect(webdb_dir)
-
-    # 首先在web_cloud_track中找文件目录，如果能找到就
-    songs_cloud = dict()
     webdb_cursor = webdb_sql.cursor()
-    web_cloud_track = webdb_cursor.execute(
-        'SELECT id,file FROM web_cloud_track')
-    for tid, file in web_cloud_track:
-        # 这里tid是str，转化为int，转化过程中出现问题就跳过
-        try:
-            tid = int(tid)
-        except ValueError:
-            continue
-        if file is not '':
-            songs_cloud[tid] = file
 
-    # 然后在web_offline_track中找文件，届时需要手动合成目录和歌曲文件名
-    # 也需要判断如果这首歌已经在songs_cloud中了就不要添加了。
-    songs_offline = dict()
+    # 在web_offline_track中找文件，届时需要手动合成目录和歌曲文件名
+    songs_dict = dict()
     web_offline_track = webdb_cursor.execute(
-        'SELECT track_id,relative_path FROM web_offline_track')
-    for tid, path in web_offline_track:
-        # 如果路径是空就跳过
-        if path == '':
+        'SELECT track_id, relative_path FROM web_offline_track')
+    for tid, relative_path in web_offline_track:
+        if relative_path == '':
             continue
-        if tid not in songs_cloud:
-            # 因为relative_path中储存的是相对目录，所以这里把父目录和相对目录合并一下。
-            songs_offline[tid] = os.path.join(songs_dir, path)
-    # 虽然牺牲了songs_cloud,但是本来它也不需要了
-    songs_dict = songs_cloud
-    songs_dict.update(songs_offline)
+        else:
+            songs_dict[tid] = os.path.join(songs_dir, relative_path)
 
     return songs_dict
 
