@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>694</width>
-    <height>618</height>
+    <width>620</width>
+    <height>523</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -121,6 +121,9 @@
      <attribute name="horizontalHeaderDefaultSectionSize">
       <number>70</number>
      </attribute>
+     <attribute name="horizontalHeaderStretchLastSection">
+      <bool>true</bool>
+     </attribute>
      <attribute name="verticalHeaderDefaultSectionSize">
       <number>20</number>
      </attribute>
@@ -132,6 +135,11 @@
      <column>
       <property name="text">
        <string>歌曲数</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>创建用户</string>
       </property>
      </column>
     </widget>

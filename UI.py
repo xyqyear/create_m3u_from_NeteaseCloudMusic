@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'UI.ui',
 # licensing of 'UI.ui' applies.
 #
-# Created: Thu Feb  7 15:44:06 2019
+# Created: Thu Feb  7 16:55:24 2019
 #      by: pyside2-uic  running on PySide2 5.12.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -13,7 +13,7 @@ from PySide2 import QtCore, QtGui, QtWidgets
 class Ui_main_window(object):
     def setupUi(self, main_window):
         main_window.setObjectName("main_window")
-        main_window.resize(694, 618)
+        main_window.resize(620, 523)
         self.verticalLayout = QtWidgets.QVBoxLayout(main_window)
         self.verticalLayout.setObjectName("verticalLayout")
         self.horizontalLayout = QtWidgets.QHBoxLayout()
@@ -58,13 +58,16 @@ class Ui_main_window(object):
         self.verticalLayout.addLayout(self.horizontalLayout_2)
         self.tableWidget = QtWidgets.QTableWidget(main_window)
         self.tableWidget.setObjectName("tableWidget")
-        self.tableWidget.setColumnCount(2)
+        self.tableWidget.setColumnCount(3)
         self.tableWidget.setRowCount(0)
         item = QtWidgets.QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(0, item)
         item = QtWidgets.QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(1, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget.setHorizontalHeaderItem(2, item)
         self.tableWidget.horizontalHeader().setDefaultSectionSize(70)
+        self.tableWidget.horizontalHeader().setStretchLastSection(True)
         self.tableWidget.verticalHeader().setDefaultSectionSize(20)
         self.verticalLayout.addWidget(self.tableWidget)
 
@@ -81,4 +84,5 @@ class Ui_main_window(object):
         self.list_button.setText(QtWidgets.QApplication.translate("main_window", "列出歌单", None, -1))
         self.tableWidget.horizontalHeaderItem(0).setText(QtWidgets.QApplication.translate("main_window", "歌单名", None, -1))
         self.tableWidget.horizontalHeaderItem(1).setText(QtWidgets.QApplication.translate("main_window", "歌曲数", None, -1))
+        self.tableWidget.horizontalHeaderItem(2).setText(QtWidgets.QApplication.translate("main_window", "创建用户", None, -1))
 
