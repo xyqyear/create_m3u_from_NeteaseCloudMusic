@@ -99,5 +99,6 @@ ENV/
 
 # mypy
 .mypy_cache/
+.idea/
 dist/Exporter_gbk.exe
 Exporter_gbk.py
