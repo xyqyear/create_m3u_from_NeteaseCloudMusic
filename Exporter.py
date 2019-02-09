@@ -97,12 +97,16 @@ def tid2dir_offline(library_dir, webdb_dir):
     # 在web_offline_track中找文件，届时需要手动合成目录和歌曲文件名
     songs_dict = dict()
     web_offline_track = webdb_cursor.execute(
-        'SELECT track_id, relative_path FROM web_offline_track')
-    for tid, relative_path in web_offline_track:
+        'SELECT track_id, relative_path, track_name, artist_name, album_name FROM web_offline_track')
+    for tid, relative_path, name, artist, album in web_offline_track:
         if relative_path == '':
             continue
         else:
-            songs_dict[tid] = os.path.join(songs_dir, relative_path)
+            songs_dict[tid] = dict()
+            songs_dict[tid]['file_path'] = os.path.join(songs_dir, relative_path)
+            songs_dict[tid]['name'] = name
+            songs_dict[tid]['artist'] = artist
+            songs_dict[tid]['album'] = album
 
     return songs_dict
 
@@ -124,7 +128,7 @@ def playlist_dict_to_m3u(playlists, songs, playlist_ids):
             _all += 1
             if song in songs:
                 _in += 1
-                m3u_content[name] += '\n' + songs[song]
+                m3u_content[name] += '\n' + songs[song]['file_path']
     return m3u_content
 
 
