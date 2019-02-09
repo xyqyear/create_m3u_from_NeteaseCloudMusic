@@ -99,7 +99,10 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+# custom
 .idea/
 translateUI.bat
+config.json
 dist/Exporter_gbk.exe
 Exporter_gbk.py

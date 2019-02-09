@@ -117,8 +117,8 @@ def playlist_dict_to_m3u(playlists, songs, playlist_ids):
 
     _all = 0
     _in = 0
-    for id in playlist_ids:
-        present_playlist = playlists[id]
+    for _id in playlist_ids:
+        present_playlist = playlists[_id]
         name = present_playlist['playlist_name']
         # 预先加一个m3u标签
         m3u_content[name] = '#EXTM3U'
@@ -150,7 +150,7 @@ def playlist_filter_as_userid(playlists, userid):
     return playlist_ids
 
 
-def save_m3u(m3u_content, encoding='utf-8'):
+def save_m3u(m3u_content, top, encoding='utf-8'):
     """把m3u字典写入文件"""
     for name, content in m3u_content.items():
         # 去除敏感字符
@@ -159,7 +159,10 @@ def save_m3u(m3u_content, encoding='utf-8'):
             .replace('*', ' ').replace('?', ' ')\
             .replace('"', ' ').replace('<', ' ')\
             .replace('>', ' ').replace('|', ' ')
-        with open(name + '.m3u', 'w', encoding=encoding, errors='ignore') as m3u_file:
+
+        file_name = name + '.m3u'
+        file_path = os.path.join(top, file_name)
+        with open(file_path, 'w', encoding=encoding, errors='ignore') as m3u_file:
             m3u_file.write(content)
 
 
@@ -198,7 +201,7 @@ def main():
     # 生成m3u格式字符串
     m3u_dict = playlist_dict_to_m3u(playlists, songs, playlist_ids)
     # 保存到文件
-    save_m3u(m3u_dict)
+    save_m3u(m3u_dict, os.path.abspath('.'))
 
 
 if __name__ == '__main__':

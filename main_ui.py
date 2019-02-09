@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'main_ui.ui',
 # licensing of 'main_ui.ui' applies.
 #
-# Created: Sat Feb  9 12:59:00 2019
+# Created: Sat Feb  9 16:01:32 2019
 #      by: pyside2-uic  running on PySide2 5.12.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -25,10 +25,10 @@ class Ui_main_window(object):
         self.folder_path = QtWidgets.QLineEdit(main_window)
         self.folder_path.setObjectName("folder_path")
         self.horizontalLayout.addWidget(self.folder_path)
-        self.select_folder = QtWidgets.QPushButton(main_window)
-        self.select_folder.setMaximumSize(QtCore.QSize(25, 16777215))
-        self.select_folder.setObjectName("select_folder")
-        self.horizontalLayout.addWidget(self.select_folder)
+        self.select_folder_button = QtWidgets.QPushButton(main_window)
+        self.select_folder_button.setMaximumSize(QtCore.QSize(25, 16777215))
+        self.select_folder_button.setObjectName("select_folder_button")
+        self.horizontalLayout.addWidget(self.select_folder_button)
         self.verticalLayout.addLayout(self.horizontalLayout)
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_2.setSpacing(0)
@@ -52,9 +52,9 @@ class Ui_main_window(object):
         self.horizontalLayout_2.addWidget(self.cancel_button)
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_2.addItem(spacerItem)
-        self.list_button = QtWidgets.QPushButton(main_window)
-        self.list_button.setObjectName("list_button")
-        self.horizontalLayout_2.addWidget(self.list_button)
+        self.export_button = QtWidgets.QPushButton(main_window)
+        self.export_button.setObjectName("export_button")
+        self.horizontalLayout_2.addWidget(self.export_button)
         self.verticalLayout.addLayout(self.horizontalLayout_2)
         self.tableWidget = QtWidgets.QTableWidget(main_window)
         self.tableWidget.setObjectName("tableWidget")
@@ -78,11 +78,11 @@ class Ui_main_window(object):
     def retranslateUi(self, main_window):
         main_window.setWindowTitle(QtWidgets.QApplication.translate("main_window", "网易云歌单导出", None, -1))
         self.label.setText(QtWidgets.QApplication.translate("main_window", "歌单保存路径:", None, -1))
-        self.select_folder.setText(QtWidgets.QApplication.translate("main_window", "...", None, -1))
+        self.select_folder_button.setText(QtWidgets.QApplication.translate("main_window", "...", None, -1))
         self.all_select_button.setText(QtWidgets.QApplication.translate("main_window", "全选", None, -1))
         self.reverse_button.setText(QtWidgets.QApplication.translate("main_window", "反选", None, -1))
         self.cancel_button.setText(QtWidgets.QApplication.translate("main_window", "取消", None, -1))
-        self.list_button.setText(QtWidgets.QApplication.translate("main_window", "列出歌单", None, -1))
+        self.export_button.setText(QtWidgets.QApplication.translate("main_window", "导出歌单", None, -1))
         self.tableWidget.horizontalHeaderItem(0).setText(QtWidgets.QApplication.translate("main_window", "歌单名", None, -1))
         self.tableWidget.horizontalHeaderItem(1).setText(QtWidgets.QApplication.translate("main_window", "歌曲数", None, -1))
         self.tableWidget.horizontalHeaderItem(2).setText(QtWidgets.QApplication.translate("main_window", "创建用户", None, -1))

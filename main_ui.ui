@@ -30,7 +30,7 @@
       <widget class="QLineEdit" name="folder_path"/>
      </item>
      <item>
-      <widget class="QPushButton" name="select_folder">
+      <widget class="QPushButton" name="select_folder_button">
        <property name="maximumSize">
         <size>
          <width>25</width>
@@ -108,9 +108,9 @@
       </spacer>
      </item>
      <item>
-      <widget class="QPushButton" name="list_button">
+      <widget class="QPushButton" name="export_button">
        <property name="text">
-        <string>列出歌单</string>
+        <string>导出歌单</string>
        </property>
       </widget>
      </item>
