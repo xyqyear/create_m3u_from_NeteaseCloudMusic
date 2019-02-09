@@ -99,7 +99,6 @@ ENV/
 
 # mypy
 .mypy_cache/
-
 # custom
 .idea/
 translateUI.bat
