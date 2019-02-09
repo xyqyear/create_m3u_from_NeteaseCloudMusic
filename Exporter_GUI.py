@@ -52,16 +52,11 @@ class MainWindow(QWidget, Ui_main_window):
         self.config['folder'] = folder
         self.folder_path.setText(folder)
 
-    def clear_table(self):
-        for i in range(self.tableWidget.rowCount()):
-            self.tableWidget.removeRow(0)
-
     def show_playlists(self):
         dirs = get_dir_of_db()
         webdb_dat = dirs['webdb.dat']
         self.playlists = get_playlist(webdb_dat)
 
-        self.clear_table()
         i = 0
         for pid, playlist in self.playlists.items():
             if len(playlist['songs']) == 0:
