@@ -1,5 +1,4 @@
 # -*- coding:utf-8 -*-
-import os
 import sys
 
 from main_ui import Ui_main_window
@@ -43,6 +42,8 @@ class MainWindow(QWidget, Ui_main_window):
         self.playlists = get_playlist(webdb_dat)
         i = 0
         for pid, playlist in self.playlists.items():
+            if len(playlist['songs']) == 0:
+                continue
             self.tableWidget.insertRow(i)
             item1 = QTableWidgetItem(playlist['playlist_name'])
             item1.setFlags(Qt.ItemIsSelectable | Qt.ItemIsUserCheckable | Qt.ItemIsEnabled)
@@ -58,7 +59,6 @@ class MainWindow(QWidget, Ui_main_window):
             self.tableWidget.setItem(i, 2, item3)
 
             self.column2playlist.append(pid)
-
             i += 1
 
         # bellow are songs info
