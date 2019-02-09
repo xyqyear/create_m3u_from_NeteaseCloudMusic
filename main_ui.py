@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'UI.ui',
-# licensing of 'UI.ui' applies.
+# Form implementation generated from reading ui file 'main_ui.ui',
+# licensing of 'main_ui.ui' applies.
 #
-# Created: Thu Feb  7 16:55:24 2019
+# Created: Sat Feb  9 12:59:00 2019
 #      by: pyside2-uic  running on PySide2 5.12.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -69,13 +69,14 @@ class Ui_main_window(object):
         self.tableWidget.horizontalHeader().setDefaultSectionSize(70)
         self.tableWidget.horizontalHeader().setStretchLastSection(True)
         self.tableWidget.verticalHeader().setDefaultSectionSize(20)
+        self.tableWidget.verticalHeader().setMinimumSectionSize(20)
         self.verticalLayout.addWidget(self.tableWidget)
 
         self.retranslateUi(main_window)
         QtCore.QMetaObject.connectSlotsByName(main_window)
 
     def retranslateUi(self, main_window):
-        main_window.setWindowTitle(QtWidgets.QApplication.translate("main_window", "Form", None, -1))
+        main_window.setWindowTitle(QtWidgets.QApplication.translate("main_window", "网易云歌单导出", None, -1))
         self.label.setText(QtWidgets.QApplication.translate("main_window", "歌单保存路径:", None, -1))
         self.select_folder.setText(QtWidgets.QApplication.translate("main_window", "...", None, -1))
         self.all_select_button.setText(QtWidgets.QApplication.translate("main_window", "全选", None, -1))
