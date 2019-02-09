@@ -97,12 +97,16 @@ def tid2dir_offline(library_dir, webdb_dir):
     # 在web_offline_track中找文件，届时需要手动合成目录和歌曲文件名
     songs_dict = dict()
     web_offline_track = webdb_cursor.execute(
-        'SELECT track_id, relative_path FROM web_offline_track')
-    for tid, relative_path in web_offline_track:
+        'SELECT track_id, relative_path, track_name, artist_name, album_name FROM web_offline_track')
+    for tid, relative_path, name, artist, album in web_offline_track:
         if relative_path == '':
             continue
         else:
-            songs_dict[tid] = os.path.join(songs_dir, relative_path)
+            songs_dict[tid] = dict()
+            songs_dict[tid]['file_path'] = os.path.join(songs_dir, relative_path)
+            songs_dict[tid]['name'] = name
+            songs_dict[tid]['artist'] = artist
+            songs_dict[tid]['album'] = album
 
     return songs_dict
 
@@ -113,8 +117,8 @@ def playlist_dict_to_m3u(playlists, songs, playlist_ids):
 
     _all = 0
     _in = 0
-    for id in playlist_ids:
-        present_playlist = playlists[id]
+    for _id in playlist_ids:
+        present_playlist = playlists[_id]
         name = present_playlist['playlist_name']
         # 预先加一个m3u标签
         m3u_content[name] = '#EXTM3U'
@@ -124,7 +128,7 @@ def playlist_dict_to_m3u(playlists, songs, playlist_ids):
             _all += 1
             if song in songs:
                 _in += 1
-                m3u_content[name] += '\n' + songs[song]
+                m3u_content[name] += '\n' + songs[song]['file_path']
     return m3u_content
 
 
@@ -146,7 +150,7 @@ def playlist_filter_as_userid(playlists, userid):
     return playlist_ids
 
 
-def save_m3u(m3u_content, encoding='utf-8'):
+def save_m3u(m3u_content, top, encoding='utf-8'):
     """把m3u字典写入文件"""
     for name, content in m3u_content.items():
         # 去除敏感字符
@@ -155,7 +159,10 @@ def save_m3u(m3u_content, encoding='utf-8'):
             .replace('*', ' ').replace('?', ' ')\
             .replace('"', ' ').replace('<', ' ')\
             .replace('>', ' ').replace('|', ' ')
-        with open(name + '.m3u', 'w', encoding=encoding, errors='ignore') as m3u_file:
+
+        file_name = name + '.m3u'
+        file_path = os.path.join(top, file_name)
+        with open(file_path, 'w', encoding=encoding, errors='ignore') as m3u_file:
             m3u_file.write(content)
 
 
@@ -194,7 +201,7 @@ def main():
     # 生成m3u格式字符串
     m3u_dict = playlist_dict_to_m3u(playlists, songs, playlist_ids)
     # 保存到文件
-    save_m3u(m3u_dict)
+    save_m3u(m3u_dict, os.path.abspath('.'))
 
 
 if __name__ == '__main__':
