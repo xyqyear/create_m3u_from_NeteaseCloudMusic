@@ -57,6 +57,7 @@ class MainWindow(QWidget, Ui_main_window):
         webdb_dat = dirs['webdb.dat']
         self.playlists = get_playlist(webdb_dat)
 
+        # 这个地方本来想用enumerate, 但是因为没有歌的歌单要跳过,所以就不能用了
         i = 0
         for pid, playlist in self.playlists.items():
             if len(playlist['songs']) == 0:
@@ -157,8 +158,7 @@ class SubWindow(QWidget, Ui_sub_window):
         self.songs_table_widget.setColumnWidth(1, 350)
 
     def show_songs(self):
-        i = 0
-        for tid, info in self.songs_info.items():
+        for i, (tid, info) in enumerate(self.songs_info.items()):
             self.songs_table_widget.insertRow(i)
             item1 = QTableWidgetItem(info['name'])
             item1.setFlags(Qt.ItemIsSelectable | Qt.ItemIsEnabled)

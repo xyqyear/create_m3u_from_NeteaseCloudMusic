@@ -4,6 +4,8 @@ import sqlite3
 import json
 import os
 
+from collections import Counter
+
 
 # TODO
 def logger(info):
@@ -75,15 +77,8 @@ def get_songs_dir(library_dir):
     lib_sql = sqlite3.connect(library_dir)
     lib_data = lib_sql.execute('SELECT dir FROM track')
     # 转化为列表，这样就能计数啦
-    lib_data = [i for i in lib_data]
-    lib_data_len = len(lib_data)
-    songs_dir = str()
-    # 如果某个目录出现次数超过90%,就判定这个目录就是歌曲的储存目录(临时)
-    for dir_ in lib_data:
-        if lib_data.count(dir_) / lib_data_len > 0.9:
-            # 返回值是个tuple
-            songs_dir = dir_[0]
-            break
+    lib_data = [i[0] for i in lib_data]
+    songs_dir, times = Counter(lib_data).most_common(1)[0]
     return songs_dir
 
 
