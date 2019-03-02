@@ -18,7 +18,8 @@ class MainWindow(QWidget, Ui_main_window):
         self.all_song_info = dict()
         self.column2playlist = []
         self.config = dict(folder='',
-                           pids=[])
+                           pids=[],
+                           encoding='utf-8')
 
         # window setting
         self.sub_window = None
@@ -39,10 +40,15 @@ class MainWindow(QWidget, Ui_main_window):
         self.tableWidget.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeToContents)
         self.tableWidget.doubleClicked.connect(self.view_songs)
 
+        # set combobox
+        self.encoding_box.currentTextChanged.connect(self.config_encoding)
+
         # load config file
         if os.path.exists('config.json'):
             with open('config.json', 'r', encoding='utf-8') as f:
                 self.config = json.loads(f.read())
+        if 'encoding' in self.config:
+            self.encoding_box.setCurrentText(self.config['encoding'])
         if self.config['folder']:
             self.folder_path.setText(self.config['folder'])
 
@@ -135,6 +141,9 @@ class MainWindow(QWidget, Ui_main_window):
             save_m3u(m3u_content, save_path, encoding=encoding)
 
             QMessageBox.information(self, '成功', '导出歌单成功!')
+
+    def config_encoding(self, encoding):
+        self.config['encoding'] = encoding
 
     def closeEvent(self, event):
         if self.sub_window:
