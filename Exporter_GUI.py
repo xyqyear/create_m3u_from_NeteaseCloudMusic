@@ -131,7 +131,8 @@ class MainWindow(QWidget, Ui_main_window):
             self.config_selected_pids()
             m3u_content = playlist_dict_to_m3u(self.playlists, self.all_song_info, self.config['pids'])
             save_path = self.folder_path.text()
-            save_m3u(m3u_content, save_path)
+            encoding = self.encoding_box.currentText()
+            save_m3u(m3u_content, save_path, encoding=encoding)
 
             QMessageBox.information(self, '成功', '导出歌单成功!')
 

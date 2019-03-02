@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'sub_ui.ui',
 # licensing of 'sub_ui.ui' applies.
 #
-# Created: Sat Feb  9 16:01:32 2019
+# Created: Sat Mar  2 21:28:47 2019
 #      by: pyside2-uic  running on PySide2 5.12.1
 #
 # WARNING! All changes made in this file will be lost!

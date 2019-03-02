@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'main_ui.ui',
 # licensing of 'main_ui.ui' applies.
 #
-# Created: Sat Feb  9 16:01:32 2019
+# Created: Sat Mar  2 21:28:47 2019
 #      by: pyside2-uic  running on PySide2 5.12.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -30,6 +30,9 @@ class Ui_main_window(object):
         self.select_folder_button.setObjectName("select_folder_button")
         self.horizontalLayout.addWidget(self.select_folder_button)
         self.verticalLayout.addLayout(self.horizontalLayout)
+        self.horizontalLayout_3 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_3.setObjectName("horizontalLayout_3")
+        self.verticalLayout.addLayout(self.horizontalLayout_3)
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_2.setSpacing(0)
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
@@ -50,8 +53,18 @@ class Ui_main_window(object):
         self.cancel_button.setMaximumSize(QtCore.QSize(30, 16777215))
         self.cancel_button.setObjectName("cancel_button")
         self.horizontalLayout_2.addWidget(self.cancel_button)
-        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_2.addItem(spacerItem)
+        self.encoding_label = QtWidgets.QLabel(main_window)
+        self.encoding_label.setObjectName("encoding_label")
+        self.horizontalLayout_2.addWidget(self.encoding_label)
+        self.encoding_box = QtWidgets.QComboBox(main_window)
+        self.encoding_box.setObjectName("encoding_box")
+        self.encoding_box.addItem("")
+        self.encoding_box.addItem("")
+        self.horizontalLayout_2.addWidget(self.encoding_box)
+        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_2.addItem(spacerItem1)
         self.export_button = QtWidgets.QPushButton(main_window)
         self.export_button.setObjectName("export_button")
         self.horizontalLayout_2.addWidget(self.export_button)
@@ -82,6 +95,9 @@ class Ui_main_window(object):
         self.all_select_button.setText(QtWidgets.QApplication.translate("main_window", "全选", None, -1))
         self.reverse_button.setText(QtWidgets.QApplication.translate("main_window", "反选", None, -1))
         self.cancel_button.setText(QtWidgets.QApplication.translate("main_window", "取消", None, -1))
+        self.encoding_label.setText(QtWidgets.QApplication.translate("main_window", "文件编码: ", None, -1))
+        self.encoding_box.setItemText(0, QtWidgets.QApplication.translate("main_window", "utf-8", None, -1))
+        self.encoding_box.setItemText(1, QtWidgets.QApplication.translate("main_window", "gbk", None, -1))
         self.export_button.setText(QtWidgets.QApplication.translate("main_window", "导出歌单", None, -1))
         self.tableWidget.horizontalHeaderItem(0).setText(QtWidgets.QApplication.translate("main_window", "歌单名", None, -1))
         self.tableWidget.horizontalHeaderItem(1).setText(QtWidgets.QApplication.translate("main_window", "歌曲数", None, -1))

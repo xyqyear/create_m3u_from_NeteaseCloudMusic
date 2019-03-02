@@ -45,6 +45,9 @@
     </layout>
    </item>
    <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_3"/>
+   </item>
+   <item>
     <layout class="QHBoxLayout" name="horizontalLayout_2">
      <property name="spacing">
       <number>0</number>
@@ -92,6 +95,43 @@
        <property name="text">
         <string>取消</string>
        </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Fixed</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QLabel" name="encoding_label">
+       <property name="text">
+        <string>文件编码: </string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="encoding_box">
+       <item>
+        <property name="text">
+         <string>utf-8</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>gbk</string>
+        </property>
+       </item>
       </widget>
      </item>
      <item>
