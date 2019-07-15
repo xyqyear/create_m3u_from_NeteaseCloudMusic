@@ -21,6 +21,19 @@ GUI版本依赖库:
     
     Pyside2 (pip install pyside2)
 
+## 主要文件:
+
+Exporter.py: 命令行版本的导出工具以及GUI版本的库\
+Exporter_GUI.py: GUI版本的导出工具\
+main_ui.ui: 主窗口的的ui文件\
+sub_ui.ui: 副窗口(歌单详情窗口)的ui文件\
+main_ui.py: 自动转换的主窗口文件\
+sub_ui.py: 自动转换的副窗口文件\
+translateUi.bat: 转换Qt Designer的ui文件为py文件\
+buildExe.bat: 构建exe\
+dist/Exporter.exe: 同Exporter.py\
+dist/Exporter_GUI.exe: 同Exporter_GUI.py
+
 ## 使用方法(非GUI版本)
 
 首先打开程序后会开始自动分析网易云客户端数据库文件
@@ -59,7 +72,6 @@ GUI版本依赖库:
 - [x] 简单的GUI
     - [x] 自定义输出播放列表文件目录
     - [x] 图形化选择输出的歌单
-    - [ ] 自定义m3u文件编码
+    - [x] 自定义m3u文件编码
     - [ ] 画个/找个图标
     - [ ] 更加漂亮的界面
-    - [ ] 

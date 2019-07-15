@@ -3,6 +3,7 @@
 import sqlite3
 import json
 import os
+import re
 
 from collections import Counter
 
@@ -12,6 +13,10 @@ def logger(info):
     """日志记录器"""
     info = str(info)
     print(info)
+
+
+def make_string_windows_compatible(_str):
+    return re.sub(r'[\\\/\:\*\?\"\<\>\|]', '_', _str)
 
 
 def get_dir_of_db():
@@ -149,11 +154,7 @@ def save_m3u(m3u_content, top, encoding='utf-8'):
     """把m3u字典写入文件"""
     for name, content in m3u_content.items():
         # 去除敏感字符
-        name = name.replace('\\', ' ')\
-            .replace('/', ' ').replace(':', ' ')\
-            .replace('*', ' ').replace('?', ' ')\
-            .replace('"', ' ').replace('<', ' ')\
-            .replace('>', ' ').replace('|', ' ')
+        name = make_string_windows_compatible(name)
 
         file_name = name + '.m3u'
         file_path = os.path.join(top, file_name)
